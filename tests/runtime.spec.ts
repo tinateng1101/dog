@@ -165,7 +165,7 @@ test("production PWA cached story works after offline reload", async ({
   const context = await browser.newContext({ serviceWorkers: "allow" });
   try {
     const page = await context.newPage();
-    await page.goto("/");
+    await page.goto("/?preview=test");
     await page.getByRole("button", { name: "轻触解锁" }).waitFor();
     await page.waitForFunction(() => !!navigator.serviceWorker.controller);
     await context.setOffline(true);

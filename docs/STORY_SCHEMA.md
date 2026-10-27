@@ -5,7 +5,7 @@
 |字段|用途|
 |---|---|
 |scriptVersion/id/title/revision|脚本版本1、稳定作品ID、标题、正整数内容修订号|
-|description/phone|简介；机主owner、date、time、passcode、wallpaper、theme等|
+|description/phone|简介；机主owner、date、time、passcode、wallpaper、theme等。wallpaper 可用内置名称（如 sage），也可用 data:image/jpeg、png、webp、gif 的 base64 内嵌图片|
 |installedApps|注册 App ID，或完整 App 配置（名称、图标、文件夹、Dock、visible、installed）；顺序即桌面顺序|
 |contacts|id、name、phone、avatar、bio；owner 保留给机主|
 |chats|稳定会话id、app、title、participants、messages；消息需要id/body，可带senderId、time、media、kind等|

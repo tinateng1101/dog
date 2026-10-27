@@ -116,6 +116,13 @@ export function compileStory(raw: unknown): { story: Story; work: Work } {
     if (names.has(v)) fail(p, "重复 ID: " + v);
     names.add(v);
   };
+  const wallpaper = s.phone.wallpaper ?? "";
+  if (
+    /^data:/i.test(wallpaper)
+      ? !/^data:image\//.test(safeMedia(wallpaper))
+      : !/^[a-z0-9-]*$/.test(wallpaper)
+  )
+    fail("phone.wallpaper", "壁纸需要内置名称或受支持的内嵌图片");
   const contacts = new Map(s.contacts.map((c) => [c.id, c]));
   s.contacts.forEach((c, i) => unique(c.id, `contacts.${i}.id`));
   const configuredIds = s.installedApps.map((a) =>

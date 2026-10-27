@@ -3,11 +3,9 @@ test("published default matches full test preview, four dock apps and updated st
   page,
   request,
 }) => {
-  const work = await (await request.get("/work.json")).json();
-  const preview = await (await request.get("/test-work.json")).json();
+  // The default work.json is the author's story; the full-app contract lives in ?preview=test.
+  const work = await (await request.get("/test-work.json")).json();
   expect(work.id).toBe("ui-test-phone-v2");
-  expect(work.apps).toEqual(preview.apps);
-  expect(work.data).toEqual(preview.data);
   expect(
     work.apps.filter((a: { installed: boolean }) => a.installed),
   ).toHaveLength(49);
@@ -20,7 +18,7 @@ test("published default matches full test preview, four dock apps and updated st
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.setViewportSize({ width: 393, height: 852 });
-  await page.goto("/");
+  await page.goto("/?preview=test");
   await page.getByRole("button", { name: "轻触解锁" }).waitFor();
   await page
     .locator(".phone-screen")
